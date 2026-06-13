@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Grow Year';
+    src: url('grow_year.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* CSS Reset & Variables */
 :root {
     --bg-color: #080808;
@@ -120,9 +127,11 @@ p {
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: 800;
-    letter-spacing: -0.5px;
+    font-family: 'Grow Year', var(--font-stack);
+    font-size: 2rem;
+    font-weight: normal;
+    font-style: italic;
+    letter-spacing: 0.5px;
 }
 
 .logo-accent {
@@ -713,4 +722,104 @@ p {
     .hero-mockup {
         display: none; /* Hide device on very small screens for readability */
     }
+}
+
+/* Installation Guide Step styling */
+.guide-step {
+    display: flex;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
+}
+
+.guide-step:last-child {
+    margin-bottom: 0;
+}
+
+.step-num {
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1.15rem;
+    font-weight: 800;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(236, 53, 53, 0.3);
+}
+
+.guide-step h4 {
+    margin-top: 0 !important;
+    margin-bottom: 0.25rem !important;
+    color: white;
+}
+
+.guide-step p {
+    margin-bottom: 0 !important;
+    font-size: 0.9rem;
+    color: var(--text-gray);
+}
+
+/* Spinner & Button Loading Styles */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn.downloading {
+    pointer-events: none;
+    opacity: 0.95;
+    box-shadow: 0 0 15px rgba(236, 53, 53, 0.4);
+}
+
+.btn-progress-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.28) 100%);
+    transition: width 0.1s linear;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.btn-text {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn.success {
+    background: linear-gradient(135deg, #2ecc71, #27ae60) !important;
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4) !important;
+    color: white !important;
+    border-color: transparent !important;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
 }
