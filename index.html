@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ting Tong Player — Secure, Private & Ad-Free Media Client</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-accent">Ting Tong</span> Player
+            </div>
+            <nav class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#" id="modal-disclaimer-trigger">Disclaimer</a>
+                <a href="#" id="modal-privacy-trigger">Privacy Policy</a>
+                <a href="#" id="modal-dmca-trigger">DMCA</a>
+            </nav>
+            <a href="https://github.com/takiff507/ting-tong-player/releases" class="btn btn-primary nav-cta" target="_blank" rel="noopener">Download APK</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="badge">SECURE PLAYER CLIENT</div>
+                <h1>Your Ultimate <span class="highlight">Live Stream</span> Player</h1>
+                <p>An ad-free, secure web browser client designed for personal video streaming. Play any M3U playlist link with native picture-in-picture, proxy tunnels, and zero data tracking.</p>
+                <div class="hero-actions">
+                    <a href="https://github.com/takiff507/ting-tong-player/releases" class="btn btn-primary" target="_blank" rel="noopener">Download Stable APK</a>
+                    <a href="#features" class="btn btn-secondary">Explore Features</a>
+                </div>
+                <div class="hero-footer-notes">
+                    <span>
+                        <svg class="h-note-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        100% Offline Database
+                    </span>
+                    <span>
+                        <svg class="h-note-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        Built-in AdBlocker
+                    </span>
+                    <span>
+                        <svg class="h-note-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        Private Proxy Tunneling
+                    </span>
+                </div>
+            </div>
+
+            <!-- CSS Interactive Mobile Device Mockup -->
+            <div class="hero-mockup">
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <!-- Simulated App Interface -->
+                        <div class="app-header">
+                            <div class="app-title">Ting Tong Player</div>
+                            <div class="app-subtitle">Your Ultimate Live Stream Player</div>
+                            <div class="app-live-indicator">
+                                <span class="live-dot"></span> LIVE
+                            </div>
+                        </div>
+
+                        <div class="app-content">
+                            <div class="mock-search">Search streams...</div>
+                            <div class="mock-chips">
+                                <span class="chip active">Cricket</span>
+                                <span class="chip">Football</span>
+                                <span class="chip">Boxing</span>
+                            </div>
+                            <div class="mock-list-title">All Streams</div>
+                            <div class="mock-list">
+                                <div class="mock-item">
+                                    <div class="mock-icon">
+                                        <svg class="mock-svg cricket" viewBox="0 0 24 24"><path fill="currentColor" d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
+                                    </div>
+                                    <div class="mock-info">
+                                        <div class="mock-name">Example Live Stream 1</div>
+                                        <div class="mock-url">https://example-stream.com/ch1...</div>
+                                    </div>
+                                    <div class="mock-fav">★</div>
+                                </div>
+                                <div class="mock-item">
+                                    <div class="mock-icon">
+                                        <svg class="mock-svg football" viewBox="0 0 24 24"><path fill="currentColor" d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
+                                    </div>
+                                    <div class="mock-info">
+                                        <div class="mock-name">Example Live Stream 2</div>
+                                        <div class="mock-url">https://example-stream.com/ch2...</div>
+                                    </div>
+                                    <div class="mock-fav">★</div>
+                                </div>
+                                <div class="mock-item">
+                                    <div class="mock-icon">
+                                        <svg class="mock-svg live-tv" viewBox="0 0 24 24"><path fill="currentColor" d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
+                                    </div>
+                                    <div class="mock-info">
+                                        <div class="mock-name">Example News Stream</div>
+                                        <div class="mock-url">https://example-stream.com/ch3...</div>
+                                    </div>
+                                    <div class="mock-fav">☆</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="phone-navigation-bar">
+                            <span class="nav-btn">◀</span>
+                            <span class="nav-btn-circle">●</span>
+                            <span class="nav-btn-square">■</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="features-header">
+            <h2>Packed with Power Features</h2>
+            <p>Designed for performance, safety, and ultimate customizability.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon-container">
+                    <svg class="f-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3>Secure AdBlocker</h3>
+                <p>Automatic web block scripts clean all redirect popups, banner ads, and malicious scripts from stream hosters.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon-container">
+                    <svg class="f-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19 11h-8v6h8v-6zm4 8V4.98C23 3.88 22.1 3 21 3H3c-1.1 0-2 .88-2 1.98V19c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2zm-2 .02H3V4.97h18v14.05z"/></svg>
+                </div>
+                <h3>Picture-in-Picture</h3>
+                <p>Multitask easily on your phone. Exit the app while watching and the stream automatically scales down to a floating screen.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon-container">
+                    <svg class="f-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                </div>
+                <h3>100% Data Privacy</h3>
+                <p>We collect no history, no analytics, and no logins. All playlist links and custom streams are stored on your device's offline Room database.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon-container">
+                    <svg class="f-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                </div>
+                <h3>HTTP Proxy Tunneling</h3>
+                <p>Safely route heavy streaming segments through your custom HTTP Proxy address to protect your personal IP address from server trackers.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon-container">
+                    <svg class="f-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58s1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41s-.23-1.05-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg>
+                </div>
+                <h3>Category Filters</h3>
+                <p>Organize your video streams easily with color-coded category chips to quickly sort and locate your links.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon-container">
+                    <svg class="f-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+                </div>
+                <h3>Local Backups</h3>
+                <p>Backup all custom added streams to your clipboard as an encrypted JSON string and restore them instantly on any device.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legal Compliance Modal: Disclaimer -->
+    <div id="modal-disclaimer" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Terms of Use & Content Disclaimer</h3>
+                <span class="modal-close" id="modal-disclaimer-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h4>1. Player Utility Client Only</h4>
+                <p>Ting Tong Player operates exclusively as a client-side media browser and player utility. The application does not contain, host, catalog, compile, index, publish, or stream any digital media links or audio-video files. All streaming configurations, M3U playlists, and URLs are imported and managed strictly by the end-user.</p>
+                
+                <h4>2. Content Ownership & Responsibility</h4>
+                <p>We do not own, manage, or affiliate with any streams accessed through the app. All stream feeds are hosted and distributed by third-party servers. Users are solely responsible for verifying the copyright compliance and licensing agreements of any links they configure and play within the software.</p>
+
+                <h4>3. No Warranty & Limitation of Liability</h4>
+                <p>This software is provided "as is" without warranty of any kind. Under no circumstances shall the developer or affiliates be held liable for any damages, legal issues, ISP violations, or copyright conflicts arising from your use or misuse of the client player.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Legal Compliance Modal: Privacy Policy -->
+    <div id="modal-privacy" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Privacy Policy</h3>
+                <span class="modal-close" id="modal-privacy-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h4>1. Zero Information Collection</h4>
+                <p>We do not collect, monitor, track, store, or sell any of your personal details, browsing history, viewed streams, or network data.</p>
+
+                <h4>2. Offline Storage Framework</h4>
+                <p>All database tables (favorites, recent streams, and imported channels) are stored locally on your device within the app's secure private SQLite directory. No telemetry or server syncing is integrated.</p>
+
+                <h4>3. Web-Engine Isolation</h4>
+                <p>The app includes an ad-blocker inside the local WebView to strip advertisement trackers, cookies, and scripts loaded by external websites, helping to prevent tracking by third-party hosts.</p>
+                
+                <h4>4. Proxy Routing Options</h4>
+                <p>A built-in custom HTTP proxy module allows you to route media requests through a private server to mask your real IP address from targets.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Legal Compliance Modal: DMCA Policy -->
+    <div id="modal-dmca" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>DMCA Copyright & Takedown Policy</h3>
+                <span class="modal-close" id="modal-dmca-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h4>1. No Hosting Statement</h4>
+                <p>Ting Tong Player does not host, upload, or transmit any video streams, broadcasts, media streams, or data packets on any servers. The application functions as an offline player client that opens links configured by the user, similar to a standard web browser (like Google Chrome) or a file player (like VLC).</p>
+
+                <h4>2. Takedown Requests Guidance</h4>
+                <p>Because no copyrighted files reside on our servers, we cannot remove content from the internet. If you are a copyright owner or licensing agent seeking a takedown of an infringing stream, you must contact the web hosting provider or stream host directly. Disabling the app or deleting our source code has no impact on the availability of the stream itself.</p>
+
+                <h4>3. Open Source Compliance</h4>
+                <p>This application is developed in compliance with standard client-side browser laws. We respect intellectual property rights and encourage users to only stream content for which they have legally obtained access.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2026 Ting Tong Player. All rights reserved. Open-source personal client utility.</p>
+            <div class="footer-links">
+                <a href="#" id="footer-disclaimer-trigger">Disclaimer</a>
+                <a href="#" id="footer-privacy-trigger">Privacy Policy</a>
+                <a href="#" id="footer-dmca-trigger">DMCA Guidelines</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
