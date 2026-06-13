@@ -1,9 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const releasesApiUrl = "https://api.github.com/repos/takiff507/ting-tong-player/releases?per_page=100";
+    const apkFileName = "ting_tong_player_safe.apk";
+    const fallbackApkUrl = apkFileName;
+
     // Modal Selectors
     const modalDisclaimer = document.getElementById("modal-disclaimer");
     const modalPrivacy = document.getElementById("modal-privacy");
     const modalDmca = document.getElementById("modal-dmca");
     const modalGuide = document.getElementById("modal-guide");
+    const downloadCount = document.getElementById("download-count");
+    const downloadCountNote = document.getElementById("download-count-note");
 
     // Close Buttons
     const closeDisclaimer = document.getElementById("modal-disclaimer-close");
@@ -126,6 +132,69 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Download Buttons Animation, Auto-Trigger & Modal Popup
     const downloadBtns = document.querySelectorAll('a[download]');
+    let releaseApkUrl = "";
+
+    const formatCount = (value) => {
+        return new Intl.NumberFormat("en-IN").format(value);
+    };
+
+    const applyDownloadUrl = (url) => {
+        downloadBtns.forEach(btn => {
+            btn.setAttribute("href", url || fallbackApkUrl);
+        });
+    };
+
+    const loadDownloadStats = async () => {
+        if (!downloadCount) {
+            return;
+        }
+
+        try {
+            const response = await fetch(releasesApiUrl, {
+                headers: {
+                    "Accept": "application/vnd.github+json"
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error("GitHub Releases API unavailable");
+            }
+
+            const releases = await response.json();
+            let totalDownloads = 0;
+            let latestApkUrl = "";
+
+            releases.forEach(release => {
+                const assets = Array.isArray(release.assets) ? release.assets : [];
+                assets.forEach(asset => {
+                    if (asset.name === apkFileName || asset.name.toLowerCase().endsWith(".apk")) {
+                        totalDownloads += Number(asset.download_count || 0);
+                        if (!latestApkUrl && asset.browser_download_url) {
+                            latestApkUrl = asset.browser_download_url;
+                        }
+                    }
+                });
+            });
+
+            releaseApkUrl = latestApkUrl;
+            applyDownloadUrl(releaseApkUrl || fallbackApkUrl);
+            downloadCount.textContent = formatCount(totalDownloads);
+
+            if (downloadCountNote) {
+                downloadCountNote.textContent = releaseApkUrl
+                    ? "Real count from GitHub Releases"
+                    : "Release counter starts after first APK release";
+            }
+        } catch (error) {
+            downloadCount.textContent = "Live soon";
+            if (downloadCountNote) {
+                downloadCountNote.textContent = "Counter will refresh from GitHub Releases";
+            }
+            applyDownloadUrl(fallbackApkUrl);
+        }
+    };
+
+    loadDownloadStats();
 
     downloadBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -137,7 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            const downloadUrl = btn.getAttribute('href');
+            const downloadUrl = releaseApkUrl || btn.getAttribute('href') || fallbackApkUrl;
             const originalHtml = btn.innerHTML;
 
             // Add downloading class and progress HTML
@@ -173,6 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
+                    setTimeout(loadDownloadStats, 8000);
 
                     // Open the installation/setup guide modal automatically after a short delay
                     setTimeout(() => {
