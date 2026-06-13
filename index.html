@@ -19,13 +19,12 @@
             </div>
             <nav class="nav-links">
                 <a href="#features">Features</a>
-                <a href="#safety">Safe App</a>
                 <a href="#" id="modal-guide-trigger">Setup Guide</a>
                 <a href="#" id="modal-disclaimer-trigger">Disclaimer</a>
                 <a href="#" id="modal-privacy-trigger">Privacy Policy</a>
                 <a href="#" id="modal-dmca-trigger">DMCA</a>
             </nav>
-            <a href="https://github.com/takiff507/ting-tong-player/releases/latest/download/ting_tong_player_safe.apk" class="btn btn-primary nav-cta" download>Download APK</a>
+            <a href="ting_tong_player_safe.apk" class="btn btn-primary nav-cta" download>Download APK</a>
         </div>
     </header>
 
@@ -37,7 +36,7 @@
                 <h1>Your Ultimate <span class="highlight">Live Stream</span> Player</h1>
                 <p>A safe, ad-free media client designed for personal video streaming. Play any M3U playlist link with picture-in-picture, proxy tunnels, and zero data tracking.</p>
                 <div class="hero-actions">
-                    <a href="https://github.com/takiff507/ting-tong-player/releases/latest/download/ting_tong_player_safe.apk" class="btn btn-primary" download>Download Stable APK</a>
+                    <a href="ting_tong_player_safe.apk" class="btn btn-primary" download>Download Stable APK</a>
                     <a href="#features" class="btn btn-secondary">Explore Features</a>
                 </div>
                 <div class="hero-footer-notes">
@@ -53,36 +52,15 @@
                         <svg class="h-note-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                         Private Proxy Tunneling
                     </span>
+                    <span>
+                        <svg class="h-note-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        Safe App
+                    </span>
                 </div>
             </div>
 
             <div class="hero-mockup">
-                <img src="app.png" alt="Ting Tong Player Screenshot" style="max-width: 320px; width: 100%; height: auto;">
-            </div>
-        </div>
-    </section>
-
-    <!-- Safety Section -->
-    <section id="safety" class="safety">
-        <div class="safety-container">
-            <div class="safety-copy">
-                <div class="badge">OFFICIAL SAFE APK</div>
-                <h2>Clean, private, and built for trust.</h2>
-                <p>Ting Tong Player is presented as the official safe app build. It is designed without analytics, account login, hidden telemetry, or personal data collection.</p>
-            </div>
-            <div class="safety-grid">
-                <div class="safety-card">
-                    <h3>Verified Download Counter</h3>
-                    <p>The live count is read from GitHub Releases, so website redeploys do not delete the download history.</p>
-                </div>
-                <div class="safety-card">
-                    <h3>Privacy-First Design</h3>
-                    <p>Your playlists, favorites, and custom links stay on your own device in local storage.</p>
-                </div>
-                <div class="safety-card">
-                    <h3>Official Source Only</h3>
-                    <p>Use the download button on this page for the official APK and avoid unknown mirrors or modified copies.</p>
-                </div>
+                <img src="app.png" alt="Ting Tong Player Screenshot">
             </div>
         </div>
     </section>
@@ -248,17 +226,16 @@
             <p>&copy; 2026 Ting Tong Player. All rights reserved. Open-source personal client utility.</p>
             <div class="footer-stats" aria-label="Public website counters">
                 <div class="footer-stat">
-                    <span>APK Downloads</span>
-                    <strong id="footer-download-count">Loading...</strong>
-                    <small id="footer-download-note">GitHub Releases</small>
+                    <div class="counter-pill" aria-live="polite">
+                        <span class="counter-pill-label">Downloads</span>
+                        <strong id="footer-download-count">...</strong>
+                    </div>
                 </div>
                 <div class="footer-stat footer-stat-badge">
-                    <span>Website Visitors</span>
-                    <img
-                        src="https://visitor-badge.laobi.icu/badge?page_id=takiff507.ting-tong-player.website&left_text=Visitors&left_color=%23111111&right_color=%23EC3535&format=true&radius=8&height=28"
-                        alt="Website visitor counter"
-                    >
-                    <small>Total page loads</small>
+                    <div class="counter-pill" aria-live="polite">
+                        <span class="counter-pill-label">Visitors</span>
+                        <strong id="footer-visitor-count">--</strong>
+                    </div>
                 </div>
             </div>
             <div class="footer-links">

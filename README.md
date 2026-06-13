@@ -15,10 +15,6 @@
 
   <p>
     <a href="https://takiff507.github.io/ting-tong-player/"><strong>Open Website</strong></a>
-    &nbsp;|&nbsp;
-    <a href="https://github.com/takiff507/ting-tong-player/releases/latest/download/ting_tong_player_safe.apk"><strong>Download APK</strong></a>
-    &nbsp;|&nbsp;
-    <a href="https://github.com/takiff507/ting-tong-player/releases"><strong>Releases</strong></a>
   </p>
 </div>
 
@@ -44,24 +40,23 @@ This project is presented as the official safe app build for Ting Tong Player. T
 - No hidden telemetry
 - No selling or sharing user data
 - No PC paths, local machine details, or private developer information in public docs
-- Official downloads are served from this repository and GitHub Pages
+- Official downloads are served from the website download button
 
 Security note: app safety should always be judged from the official APK and trusted scan results at release time. Avoid modified APK mirrors.
 
 ## Real Download Counter
 
-The website shows a live download counter powered by GitHub Releases.
+The website shows a live download counter for APK downloads started from the website button.
 
-- Downloads are counted from GitHub release assets
+- Downloads are counted when users click the website APK download button
 - Counts survive website redeploys and future README updates
 - The website can be pushed again without deleting download history
-- Future APK releases can be counted together as total APK downloads
 
-## Cumulative Website Visitors
+## Real Website Visitors
 
-The footer also shows a cumulative website visitor counter. It is a simple public page-load counter, not a live online-users counter.
+The footer also shows a website visitor counter. Refresh spam is blocked in the browser so the same device does not increase the visitor number again on every reload.
 
-- Yesterday's visits and today's visits add together
+- Visitors are counted once per browser
 - Website redeploys do not reset the counter
 - No local PC paths or private device information are published
 - No personal user profile is shown on the website
@@ -82,5 +77,4 @@ Ting Tong Player does not host, upload, index, or sell any video streams. It is 
 ## Official Links
 
 - Website: https://takiff507.github.io/ting-tong-player/
-- APK: https://github.com/takiff507/ting-tong-player/releases/latest/download/ting_tong_player_safe.apk
-- Releases: https://github.com/takiff507/ting-tong-player/releases
+- APK: open the website and use the Download APK button

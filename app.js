@@ -1,97 +1,75 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const releasesApiUrl = "https://api.github.com/repos/takiff507/ting-tong-player/releases?per_page=100";
-    const apkFileName = "ting_tong_player_safe.apk";
-    const latestReleaseApkUrl = "https://github.com/takiff507/ting-tong-player/releases/latest/download/ting_tong_player_safe.apk";
-    const fallbackApkUrl = apkFileName;
+    const apkDownloadUrl = "ting_tong_player_safe.apk";
+    const counterApiBaseUrl = "https://api.counterapi.dev/v1/takiff507-ting-tong-player";
+    const downloadCounterName = "apk-downloads";
+    const visitorCounterName = "website-visitors";
+    const visitorCountedKey = "tingTongPlayerVisitorCounted";
+    const isPublishedSite = window.location.hostname === "takiff507.github.io";
 
-    // Modal Selectors
-    const modalDisclaimer = document.getElementById("modal-disclaimer");
-    const modalPrivacy = document.getElementById("modal-privacy");
-    const modalDmca = document.getElementById("modal-dmca");
-    const modalGuide = document.getElementById("modal-guide");
-    const footerDownloadCount = document.getElementById("footer-download-count");
-    const footerDownloadNote = document.getElementById("footer-download-note");
+    const getById = (id) => document.getElementById(id);
 
-    // Close Buttons
-    const closeDisclaimer = document.getElementById("modal-disclaimer-close");
-    const closePrivacy = document.getElementById("modal-privacy-close");
-    const closeDmca = document.getElementById("modal-dmca-close");
-    const closeGuide = document.getElementById("modal-guide-close");
+    const modalDisclaimer = getById("modal-disclaimer");
+    const modalPrivacy = getById("modal-privacy");
+    const modalDmca = getById("modal-dmca");
+    const modalGuide = getById("modal-guide");
+    const footerDownloadCount = getById("footer-download-count");
+    const footerVisitorCount = getById("footer-visitor-count");
 
-    // Trigger Lists
+    const closeDisclaimer = getById("modal-disclaimer-close");
+    const closePrivacy = getById("modal-privacy-close");
+    const closeDmca = getById("modal-dmca-close");
+    const closeGuide = getById("modal-guide-close");
+
     const triggersDisclaimer = [
-        document.getElementById("modal-disclaimer-trigger"),
-        document.getElementById("footer-disclaimer-trigger")
+        getById("modal-disclaimer-trigger"),
+        getById("footer-disclaimer-trigger")
     ];
 
     const triggersPrivacy = [
-        document.getElementById("modal-privacy-trigger"),
-        document.getElementById("footer-privacy-trigger")
+        getById("modal-privacy-trigger"),
+        getById("footer-privacy-trigger")
     ];
 
     const triggersDmca = [
-        document.getElementById("modal-dmca-trigger"),
-        document.getElementById("footer-dmca-trigger")
+        getById("modal-dmca-trigger"),
+        getById("footer-dmca-trigger")
     ];
 
     const triggersGuide = [
-        document.getElementById("modal-guide-trigger"),
-        document.getElementById("footer-guide-trigger")
+        getById("modal-guide-trigger"),
+        getById("footer-guide-trigger")
     ];
 
-    // Helper functions to open/close
     const openModal = (modal) => {
         if (modal) {
             modal.classList.add("active");
-            document.body.style.overflow = "hidden"; // Disable scroll behind
+            document.body.style.overflow = "hidden";
         }
     };
 
     const closeModal = (modal) => {
         if (modal) {
             modal.classList.remove("active");
-            document.body.style.overflow = ""; // Re-enable scroll
+            document.body.style.overflow = "";
         }
     };
 
-    // Attach Trigger Listeners
-    triggersDisclaimer.forEach(trigger => {
-        if (trigger) {
-            trigger.addEventListener("click", (e) => {
-                e.preventDefault();
-                openModal(modalDisclaimer);
-            });
-        }
-    });
+    const bindModalTriggers = (triggers, modal) => {
+        triggers.forEach(trigger => {
+            if (trigger) {
+                trigger.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    openModal(modal);
+                });
+            }
+        });
+    };
 
-    triggersPrivacy.forEach(trigger => {
-        if (trigger) {
-            trigger.addEventListener("click", (e) => {
-                e.preventDefault();
-                openModal(modalPrivacy);
-            });
-        }
-    });
+    bindModalTriggers(triggersDisclaimer, modalDisclaimer);
+    bindModalTriggers(triggersPrivacy, modalPrivacy);
+    bindModalTriggers(triggersDmca, modalDmca);
+    bindModalTriggers(triggersGuide, modalGuide);
 
-    triggersDmca.forEach(trigger => {
-        if (trigger) {
-            trigger.addEventListener("click", (e) => {
-                e.preventDefault();
-                openModal(modalDmca);
-            });
-        }
-    });
-
-    triggersGuide.forEach(trigger => {
-        if (trigger) {
-            trigger.addEventListener("click", (e) => {
-                e.preventDefault();
-                openModal(modalGuide);
-            });
-        }
-    });
-
-    // Attach Close Button Listeners
     if (closeDisclaimer) {
         closeDisclaimer.addEventListener("click", () => closeModal(modalDisclaimer));
     }
@@ -105,25 +83,23 @@ document.addEventListener("DOMContentLoaded", () => {
         closeGuide.addEventListener("click", () => closeModal(modalGuide));
     }
 
-    // Close modals on clicking background overlay
-    window.addEventListener("click", (e) => {
-        if (e.target === modalDisclaimer) {
+    window.addEventListener("click", (event) => {
+        if (event.target === modalDisclaimer) {
             closeModal(modalDisclaimer);
         }
-        if (e.target === modalPrivacy) {
+        if (event.target === modalPrivacy) {
             closeModal(modalPrivacy);
         }
-        if (e.target === modalDmca) {
+        if (event.target === modalDmca) {
             closeModal(modalDmca);
         }
-        if (e.target === modalGuide) {
+        if (event.target === modalGuide) {
             closeModal(modalGuide);
         }
     });
 
-    // Close on escape key
-    window.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
+    window.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
             closeModal(modalDisclaimer);
             closeModal(modalPrivacy);
             closeModal(modalDmca);
@@ -131,132 +107,167 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Download Buttons Animation, Auto-Trigger & Modal Popup
-    const downloadBtns = document.querySelectorAll('a[download]');
-    let releaseApkUrl = latestReleaseApkUrl;
+    const downloadBtns = document.querySelectorAll("a[download]");
 
     const formatCount = (value) => {
         return new Intl.NumberFormat("en-IN").format(value);
     };
 
-    const applyDownloadUrl = (url) => {
-        downloadBtns.forEach(btn => {
-            btn.setAttribute("href", url || fallbackApkUrl);
+    const applyDownloadUrl = () => {
+        downloadBtns.forEach(button => {
+            button.setAttribute("href", apkDownloadUrl);
         });
     };
 
-    const loadDownloadStats = async () => {
+    const counterUrl = (name, action = "") => {
+        return `${counterApiBaseUrl}/${name}/${action}`;
+    };
+
+    const readCounter = async (name) => {
+        const response = await fetch(counterUrl(name), { cache: "no-store" });
+        if (!response.ok) {
+            return 0;
+        }
+
+        const data = await response.json();
+        return Number(data.count || 0);
+    };
+
+    const incrementCounter = async (name) => {
+        const response = await fetch(counterUrl(name, "up"), { cache: "no-store" });
+        if (!response.ok) {
+            throw new Error("Counter API unavailable");
+        }
+
+        const data = await response.json();
+        return Number(data.count || 0);
+    };
+
+    const hasVisitorBeenCounted = () => {
         try {
-            const response = await fetch(releasesApiUrl, {
-                headers: {
-                    "Accept": "application/vnd.github+json"
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error("GitHub Releases API unavailable");
-            }
-
-            const releases = await response.json();
-            let totalDownloads = 0;
-            let latestApkUrl = "";
-
-            releases.forEach(release => {
-                const assets = Array.isArray(release.assets) ? release.assets : [];
-                assets.forEach(asset => {
-                    if (asset.name === apkFileName || asset.name.toLowerCase().endsWith(".apk")) {
-                        totalDownloads += Number(asset.download_count || 0);
-                        if (!latestApkUrl && asset.browser_download_url) {
-                            latestApkUrl = asset.browser_download_url;
-                        }
-                    }
-                });
-            });
-
-            releaseApkUrl = latestApkUrl;
-            applyDownloadUrl(releaseApkUrl || latestReleaseApkUrl);
-
-            if (footerDownloadCount) {
-                footerDownloadCount.textContent = formatCount(totalDownloads);
-            }
-
-            if (footerDownloadNote) {
-                footerDownloadNote.textContent = "GitHub Releases";
-            }
+            return localStorage.getItem(visitorCountedKey) === "1";
         } catch (error) {
-            if (footerDownloadCount) {
-                footerDownloadCount.textContent = "--";
-            }
-            if (footerDownloadNote) {
-                footerDownloadNote.textContent = "Counter refreshes live";
-            }
-            applyDownloadUrl(latestReleaseApkUrl || fallbackApkUrl);
+            return false;
         }
     };
 
+    const markVisitorCounted = () => {
+        try {
+            localStorage.setItem(visitorCountedKey, "1");
+        } catch (error) {
+            // Some browsers can block storage; the counter still works as a public total.
+        }
+    };
+
+    const loadDownloadStats = async () => {
+        if (!footerDownloadCount) {
+            return;
+        }
+
+        try {
+            footerDownloadCount.textContent = formatCount(await readCounter(downloadCounterName));
+        } catch (error) {
+            footerDownloadCount.textContent = "--";
+        }
+    };
+
+    const recordDownloadStats = async () => {
+        if (!isPublishedSite) {
+            await loadDownloadStats();
+            return;
+        }
+
+        try {
+            const downloadCount = await incrementCounter(downloadCounterName);
+            if (footerDownloadCount) {
+                footerDownloadCount.textContent = formatCount(downloadCount);
+            }
+        } catch (error) {
+            await loadDownloadStats();
+        }
+    };
+
+    const loadVisitorStats = async () => {
+        if (!footerVisitorCount) {
+            return;
+        }
+
+        try {
+            const alreadyCounted = hasVisitorBeenCounted();
+            const visitorCount = isPublishedSite && !alreadyCounted
+                ? await incrementCounter(visitorCounterName)
+                : await readCounter(visitorCounterName);
+
+            if (isPublishedSite && !alreadyCounted) {
+                markVisitorCounted();
+            }
+
+            footerVisitorCount.textContent = formatCount(visitorCount);
+        } catch (error) {
+            footerVisitorCount.textContent = "--";
+        }
+    };
+
+    applyDownloadUrl();
     loadDownloadStats();
+    loadVisitorStats();
+    setInterval(loadDownloadStats, 30000);
+    setInterval(loadVisitorStats, 30000);
 
-    downloadBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            // Prevent actual instant download link navigation
-            e.preventDefault();
+    downloadBtns.forEach(button => {
+        button.addEventListener("click", (event) => {
+            event.preventDefault();
 
-            // If already in progress, ignore multiple clicks
-            if (btn.classList.contains('downloading') || btn.classList.contains('success')) {
+            if (button.classList.contains("downloading") || button.classList.contains("success")) {
                 return;
             }
 
-            const downloadUrl = releaseApkUrl || btn.getAttribute('href') || latestReleaseApkUrl || fallbackApkUrl;
-            const originalHtml = btn.innerHTML;
-
-            // Add downloading class and progress HTML
-            btn.classList.add('downloading');
-            btn.innerHTML = `
+            const originalHtml = button.innerHTML;
+            button.classList.add("downloading");
+            button.innerHTML = `
                 <div class="btn-progress-bar"></div>
                 <span class="btn-text">Downloading 0%</span>
             `;
 
-            const progressBar = btn.querySelector('.btn-progress-bar');
-            const btnText = btn.querySelector('.btn-text');
-
+            const progressBar = button.querySelector(".btn-progress-bar");
+            const buttonText = button.querySelector(".btn-text");
             let progress = 0;
-            const duration = 2500; // Simulated duration of 2.5 seconds
-            const intervalTime = 50; // Update progress bar every 50ms
+            const duration = 2500;
+            const intervalTime = 50;
             const step = 100 / (duration / intervalTime);
 
             const progressInterval = setInterval(() => {
                 progress += step;
+
                 if (progress >= 100) {
                     progress = 100;
                     clearInterval(progressInterval);
 
-                    // Update button style to Green Success State
-                    btn.classList.remove('downloading');
-                    btn.classList.add('success');
-                    btn.innerHTML = `<span class="btn-text">Downloaded ✓</span>`;
+                    button.classList.remove("downloading");
+                    button.classList.add("success");
+                    button.innerHTML = `<span class="btn-text">Downloaded</span>`;
 
-                    // Trigger actual file download in browser
-                    const link = document.createElement('a');
-                    link.href = downloadUrl;
-                    link.setAttribute('download', '');
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    setTimeout(loadDownloadStats, 8000);
+                    recordDownloadStats().finally(() => {
+                        const link = document.createElement("a");
+                        link.href = apkDownloadUrl;
+                        link.setAttribute("download", "");
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    });
 
-                    // Open the installation/setup guide modal automatically after a short delay
                     setTimeout(() => {
                         openModal(modalGuide);
                     }, 500);
 
-                    // Reset button back to its default look after 3.5 seconds
                     setTimeout(() => {
-                        btn.classList.remove('success');
-                        btn.innerHTML = originalHtml;
+                        button.classList.remove("success");
+                        button.innerHTML = originalHtml;
+                        applyDownloadUrl();
                     }, 3500);
                 } else {
                     progressBar.style.width = `${progress}%`;
-                    btnText.textContent = `Downloading ${Math.round(progress)}%`;
+                    buttonText.textContent = `Downloading ${Math.round(progress)}%`;
                 }
             }, intervalTime);
         });
