@@ -973,7 +973,12 @@ p {
     }
 
     .hero-mockup {
-        display: none;
+        display: flex;
+        margin-top: 0.25rem;
+    }
+
+    .hero-mockup img {
+        max-width: min(52vw, 190px);
     }
 
     .features {
@@ -1004,6 +1009,10 @@ p {
 
     .hero-content h1 {
         font-size: 1.65rem;
+    }
+
+    .hero-mockup img {
+        max-width: min(50vw, 170px);
     }
 }
 
