@@ -57,6 +57,15 @@ The website shows a live download counter powered by GitHub Releases.
 - The website can be pushed again without deleting download history
 - Future APK releases can be counted together as total APK downloads
 
+## Cumulative Website Visitors
+
+The footer also shows a cumulative website visitor counter. It is a simple public page-load counter, not a live online-users counter.
+
+- Yesterday's visits and today's visits add together
+- Website redeploys do not reset the counter
+- No local PC paths or private device information are published
+- No personal user profile is shown on the website
+
 ## Privacy First
 
 Ting Tong Player is designed so user data stays on the user's own device.

@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const releasesApiUrl = "https://api.github.com/repos/takiff507/ting-tong-player/releases?per_page=100";
     const apkFileName = "ting_tong_player_safe.apk";
+    const latestReleaseApkUrl = "https://github.com/takiff507/ting-tong-player/releases/latest/download/ting_tong_player_safe.apk";
     const fallbackApkUrl = apkFileName;
 
     // Modal Selectors
@@ -8,8 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalPrivacy = document.getElementById("modal-privacy");
     const modalDmca = document.getElementById("modal-dmca");
     const modalGuide = document.getElementById("modal-guide");
-    const downloadCount = document.getElementById("download-count");
-    const downloadCountNote = document.getElementById("download-count-note");
+    const footerDownloadCount = document.getElementById("footer-download-count");
+    const footerDownloadNote = document.getElementById("footer-download-note");
 
     // Close Buttons
     const closeDisclaimer = document.getElementById("modal-disclaimer-close");
@@ -132,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Download Buttons Animation, Auto-Trigger & Modal Popup
     const downloadBtns = document.querySelectorAll('a[download]');
-    let releaseApkUrl = "";
+    let releaseApkUrl = latestReleaseApkUrl;
 
     const formatCount = (value) => {
         return new Intl.NumberFormat("en-IN").format(value);
@@ -145,10 +146,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const loadDownloadStats = async () => {
-        if (!downloadCount) {
-            return;
-        }
-
         try {
             const response = await fetch(releasesApiUrl, {
                 headers: {
@@ -177,20 +174,23 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             releaseApkUrl = latestApkUrl;
-            applyDownloadUrl(releaseApkUrl || fallbackApkUrl);
-            downloadCount.textContent = formatCount(totalDownloads);
+            applyDownloadUrl(releaseApkUrl || latestReleaseApkUrl);
 
-            if (downloadCountNote) {
-                downloadCountNote.textContent = releaseApkUrl
-                    ? "Real count from GitHub Releases"
-                    : "Release counter starts after first APK release";
+            if (footerDownloadCount) {
+                footerDownloadCount.textContent = formatCount(totalDownloads);
+            }
+
+            if (footerDownloadNote) {
+                footerDownloadNote.textContent = "GitHub Releases";
             }
         } catch (error) {
-            downloadCount.textContent = "Live soon";
-            if (downloadCountNote) {
-                downloadCountNote.textContent = "Counter will refresh from GitHub Releases";
+            if (footerDownloadCount) {
+                footerDownloadCount.textContent = "--";
             }
-            applyDownloadUrl(fallbackApkUrl);
+            if (footerDownloadNote) {
+                footerDownloadNote.textContent = "Counter refreshes live";
+            }
+            applyDownloadUrl(latestReleaseApkUrl || fallbackApkUrl);
         }
     };
 
@@ -206,7 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            const downloadUrl = releaseApkUrl || btn.getAttribute('href') || fallbackApkUrl;
+            const downloadUrl = releaseApkUrl || btn.getAttribute('href') || latestReleaseApkUrl || fallbackApkUrl;
             const originalHtml = btn.innerHTML;
 
             // Add downloading class and progress HTML
